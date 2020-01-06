@@ -3,7 +3,37 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  p Head over to 
-    a(href="/example")
-      code /example
-    | for some JSON example output 
+
+  p You can use this test credentials to test the payment:
+  ol
+    li Enter text Credit card number: 
+      code 4242 4242 4242 4242
+    li Expiry date (MM/YY): 
+      code 12 20
+      | (pick a date in the future)
+    li Zip code: 
+      code 94105
+    li CVC security code: 
+      code 333
+
+  p Other useful credit card numbers to test:
+  ul
+    li 
+      code 4100 0000 0000 0019
+      | - Card declined
+    li 
+      code 4000 0000 0000 9995
+      | - Card has insufficient funds
+    li 
+      code 4000 0000 0000 0069
+      | - Card expired
+
+  p See 
+    a(href="https://stripe.com/docs/testing") Stripe's full list 
+    | of test cards for more options.
+
+  br
+  p Don't forget to run 
+    |
+    code ngrok http 3000 
+    | to expose the localhost on a public domain!

@@ -1,5 +1,7 @@
-if (!process.env.CI) {
-  require('dotenv-safe').load();
+'use strict';
+
+if (!process.env.CI && process.env.NODE_ENV !== 'test') {
+  require('dotenv-safe').config();
 }
 
 const cfg = {};
@@ -13,12 +15,14 @@ cfg.port = process.env.PORT || 3000;
 // A good practice is to store these string values as system environment
 // variables, and load them from there as we are doing below. Alternately,
 // you could hard code these values here as strings.
-cfg.twilioAccountSid = process.env.TWILIO_ACCOUNT_SID || 'ACxxxxxxxxxxxxx';
 cfg.twilioAuthToken = process.env.TWILIO_AUTH_TOKEN || '1234567890abc';
 
-// A Twilio number you control - choose one from:
-// Specify in E.164 format, e.g. "+16519998877"
-cfg.twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
+// The Twiml voice type to use:
+// https://www.twilio.com/docs/voice/twiml/say/text-speech
+//
+// In this case, we are using the Amazon Polly provider which lets you fine tune
+// several options like pitch, tempo and volume of the voice prompts.
+cfg.twimlVoiceType = { voice: 'Polly.Joanna' };
 
 // Export configuration object
 module.exports = cfg;
