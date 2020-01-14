@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  if message === 'success'
+    .alert(class= 'alert-success alert-dismissible', role='alert')
+      button.close(type='button' data-dismiss='alert' aria-label='Close')
+        span(aria-hidden='true') &times;
+      <strong>Success!</strong> Data saved successfully.
+  h1= 'Payment configuration'
+  p Here you can configure the test parameters for the payment:
+  form(action='/config', method='POST')
+    .form-group
+      label(for='inputCompany')
+      | Company name
+      input#inputCompany.form-control(type='text', name='company', value=config.company)
+    .form-group
+      label(for='inputBill')
+      | Bill to pay
+      input#inputBill.form-control(type='text', name='detail', value=config.detail)
+    .form-group
+      label(for='inputAmount')
+      | Amount
+      input#inputAmount.form-control(type='text', name='amount', value=config.amount)
+    button(type="submit" class="btn btn-primary") Submit
