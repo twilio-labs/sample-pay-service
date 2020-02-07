@@ -79,7 +79,7 @@ npm install
 
 3. Install Twilio CLI
 
-The Twilio CLI allows you to manage your Twilio resources from your terminal or command prompt. You can use the Twilio CLI below to a provision phone number, configure the webhook, and run ngrok to expose your `localhost` to a public domain so the Twilio webhook can reach the expected endpoint. Alternatively, You can do this in the Twilio Console and by installing `ngrok` separately.
+> See [Twilio CLI Quickstart](https://www.twilio.com/docs/twilio-cli/quickstart) for installation guide for Linux and to learn how to use the Twilio CLI.
 
 Mac OS X
 ```bash
@@ -91,8 +91,6 @@ Windows
  npm install twilio-cli -g
  ```
 
-> See [Twilio CLI Quickstart](https://www.twilio.com/docs/twilio-cli/quickstart) for installation guide for Linux and to learn how to use the Twilio CLI.
-
 4. Log in to Twilio CLI
 ```bash
 twilio login
@@ -100,21 +98,13 @@ twilio login
 
 See [Twilio Account Settings](#twilio-account-settings) to locate the necessary environment variables.
 
-5. List phone numbers available for purchase by area code
+5. List and purchase an available phone number by area code
 
 ```bash
-twilio api:core:available-phone-numbers:local:list \
-  --area-code="209" --country-code US
+twilio phone-numbers:buy:local --country-code US --area-code="208"
 ```
 
-6. Purchase an available phone number
-
-```bash
-twilio api:core:incoming-phone-numbers:create \
-  --phone-number="+12095551212"
-```
-
-7. Set your environment variables
+6. Set your environment variables
 
 ```bash
 npm run setup
@@ -122,7 +112,7 @@ npm run setup
 
 See [Twilio Account Settings](#twilio-account-settings) to locate the necessary environment variables.
 
-8. Run the application
+7. Run the application
 
 ```bash
 npm start
@@ -134,20 +124,20 @@ Alternatively, you can use this command to start the server in development mode.
 npm run dev
 ```
 
-9. Once you have your server running, you need to expose your `localhost` to a public domain so the Twilio webhook can reach the expected endpoint. This is easy [using the Twilio CLI](https://www.twilio.com/docs/twilio-cli/general-usage#proxying-your-localhost).
+8. Once you have your server running, you need to expose your `localhost` to a public domain so the Twilio webhook can reach the expected endpoint. This is easy [using the Twilio CLI](https://www.twilio.com/docs/twilio-cli/general-usage#proxying-your-localhost).
 ```
 twilio phone-numbers:update [PN sid or E.164] --sms-url http://localhost:3000/pay
 ```
 
 This will generate a url similar to: `https://cd2ef758.ngrok.io`.
 
-10. Navigate to [http://localhost:3000](http://localhost:3000) to see some sample credit card details to test the payment.
+9. Navigate to [http://localhost:3000](http://localhost:3000) to see some sample credit card details to test the payment.
 
-11. You can also navigate to [http://localhost:3000/config](http://localhost:3000/config) to override the default payment details.
+10. You can also navigate to [http://localhost:3000/config](http://localhost:3000/config) to override the default payment details.
 
-12. That's it! Now call the Twilio phone number you configured and follow the instructions to complete the payment.
+11. That's it! Now call the Twilio phone number you configured and follow the instructions to complete the payment.
 
-13. You can see if the payment was charged on your Stripe dashboard. Take a look at [this](https://www.twilio.com/docs/voice/tutorials/how-capture-your-first-payment-using-pay#test-your-application) for more details.
+12. You can see if the payment was charged on your Stripe dashboard. [Learn how to capture your first payment](https://www.twilio.com/docs/voice/tutorials/how-capture-your-first-payment-using-pay#test-your-application) for more details.
 
 ### Tests
 
