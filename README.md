@@ -75,11 +75,36 @@ cd sample-pay-service
 
 ```bash
 npm install
-npm install -g ngrok
 ```
 
-3. Set your environment variables
+3. Install Twilio CLI
 
+> See [Twilio CLI Quickstart](https://www.twilio.com/docs/twilio-cli/quickstart) for installation guide for Linux and to learn how to use the Twilio CLI.
+
+Mac OS X
+```bash
+brew tap twilio/brew && brew install twilio
+```
+
+Windows
+ ```bash
+ npm install twilio-cli -g
+ ```
+
+4. Log in to Twilio CLI
+```bash
+twilio login
+```
+
+See [Twilio Account Settings](#twilio-account-settings) to locate the necessary environment variables.
+
+5. List and purchase an available phone number by area code
+
+```bash
+twilio phone-numbers:buy:local --country-code US --area-code="208"
+```
+
+6. Set your environment variables
 
 ```bash
 npm run setup
@@ -87,7 +112,7 @@ npm run setup
 
 See [Twilio Account Settings](#twilio-account-settings) to locate the necessary environment variables.
 
-4. Run the application
+7. Run the application
 
 ```bash
 npm start
@@ -99,23 +124,20 @@ Alternatively, you can use this command to start the server in development mode.
 npm run dev
 ```
 
-5. Once you have your server running, you need to expose your `localhost` to a public domain so the Twilio webhook can reach the expected endpoint. This is easy using `ngrok`:
+8. Once you have your server running, you need to expose your `localhost` to a public domain so the Twilio webhook can reach the expected endpoint. This is easy [using the Twilio CLI](https://www.twilio.com/docs/twilio-cli/general-usage#proxying-your-localhost).
 ```
-ngrok http 3000
-``` 
-This will generate a url similar to: `https://cd2ef758.ngrok.io`. Copy that link (you must use `https` or Twilio will reject the request).
+twilio phone-numbers:update [PN sid or E.164] --sms-url http://localhost:3000/pay
+```
 
-6. Now, you must take that public URL and configure this as a webhook for one of your phone numbers in the console. [Here is small a guide](https://www.twilio.com/docs/voice/quickstart/node#allow-twilio-to-talk-to-your-application) on how to that.
+This will generate a url similar to: `https://cd2ef758.ngrok.io`.
 
-**IMPORTANT!** Don't forget to add `/pay` (so it looks like `https://cd2ef758.ngrok.io/pay`) at the end of the url since that is the endpoint in which the application will listen for the call.
+9. Navigate to [http://localhost:3000](http://localhost:3000) to see some sample credit card details to test the payment.
 
-7. Navigate to [http://localhost:3000](http://localhost:3000) to see some sample credit card details to test the payment.
+10. You can also navigate to [http://localhost:3000/config](http://localhost:3000/config) to override the default payment details.
 
-8. You can also navigate to [http://localhost:3000/config](http://localhost:3000/config) to override the default payment details.
+11. That's it! Now call the Twilio phone number you configured and follow the instructions to complete the payment.
 
-9. That's it! Now call the Twilio phone number you configured and follow the instructions to complete the payment.
-
-10. You can see if the payment was charged on your Stripe dashboard. Take a look at [this](https://www.twilio.com/docs/voice/tutorials/how-capture-your-first-payment-using-pay#test-your-application) for more details.
+12. You can see if the payment was charged on your Stripe dashboard. [Learn how to capture your first payment](https://www.twilio.com/docs/voice/tutorials/how-capture-your-first-payment-using-pay#test-your-application) for more details.
 
 ### Tests
 
