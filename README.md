@@ -35,6 +35,7 @@ It uses the TwiML\<Pay> to prompt the user to enter a credit card's information 
 - One click deploy buttons for Heroku and Glitch
 
 ## Set up
+
 ### Requirements
 
 - [Node.js](https://nodejs.org/)
@@ -52,10 +53,10 @@ This application should give you a ready-made starting point for writing your
 own payment over the phone application. Before we begin, we need to collect
 all the config values we need to run the application:
 
-| Config&nbsp;Value | Description                                                                                                                                                  |
-| :---------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Auth&nbsp;Token   | Used to authenticate - [You'll find it on your Twilio's console](https://www.twilio.com/console).                                                         |
-| Payment&nbsp;connector | This has to be configured on your [Twilio's console](https://www.twilio.com/console/voice/pay-connectors). There you should select the Stripe connector and link it to your Stripe's account                                                         |
+| Config&nbsp;Value      | Description                                                                                                                                                                                  |
+| :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Auth&nbsp;Token        | Used to authenticate - [You'll find it on your Twilio's console](https://www.twilio.com/console).                                                                                            |
+| Payment&nbsp;connector | This has to be configured on your [Twilio's console](https://www.twilio.com/console/voice/pay-connectors). There you should select the Stripe connector and link it to your Stripe's account |
 
 **NOTE:** The Auth token will validate the requests are coming from the authorized account, otherwise you will get a `403 Forbidden` response.
 
@@ -82,16 +83,19 @@ npm install
 > See [Twilio CLI Quickstart](https://www.twilio.com/docs/twilio-cli/quickstart) for installation guide for Linux and to learn how to use the Twilio CLI.
 
 Mac OS X
+
 ```bash
 brew tap twilio/brew && brew install twilio
 ```
 
 Windows
- ```bash
- npm install twilio-cli -g
- ```
+
+```bash
+npm install twilio-cli -g
+```
 
 4. Log in to Twilio CLI
+
 ```bash
 twilio login
 ```
@@ -125,8 +129,9 @@ npm run dev
 ```
 
 8. Once you have your server running, you need to expose your `localhost` to a public domain so the Twilio webhook can reach the expected endpoint. This is easy [using the Twilio CLI](https://www.twilio.com/docs/twilio-cli/general-usage#proxying-your-localhost).
+
 ```
-twilio phone-numbers:update [PN sid or E.164] --sms-url http://localhost:3000/pay
+twilio phone-numbers:update [PN sid or E.164] --voice-url http://localhost:3000/pay
 ```
 
 This will generate a url similar to: `https://cd2ef758.ngrok.io`.
@@ -153,18 +158,20 @@ Additionally to trying out this application locally, you can deploy it to a vari
 
 Please be aware that some of these might charge you for the usage or might make the source code for this application visible to the public. When in doubt research the respective hosting service first.
 
-*Don't forget to set the environmental variables on each hosting service!*
+_Don't forget to set the environmental variables on each hosting service!_
 
-| Service                           |                                                                                                                                                                                                                           |
-| :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Heroku](https://www.heroku.com/) | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy/?template=https://github.com/twilio-labs/sample-pay-service/tree/master)                                                                                                                                       |
+| Service                           |                                                                                                                                                                                                                       |
+| :-------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Heroku](https://www.heroku.com/) | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy/?template=https://github.com/twilio-labs/sample-pay-service/tree/master)                                                       |
 | [Glitch](https://glitch.com)      | [![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/remix/clone-from-repo?REPO_URL=https://github.com/twilio-labs/sample-pay-service.git) |
 
 Here are some notes about the services:
+
 - **Heroku**: Very straightforward, just create an account and after clicking the deploy button you need to follow the instructions and that's it.
 - **Glitch**: It requirers an additional step. Once you click on the deploy button, you need to manually create the file `.env` and add set `TWILIO_AUTH_TOKEN` variable. You can duplicate the `.env.example` file and edit it accordingly.
 
 ## Resources
+
 - This project was generated using this [sample NodeJS template](https://github.com/twilio-labs/sample-template-nodejs)
 
 - [GitHub's repository template](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) functionality
