@@ -20,7 +20,7 @@ Implementations in other languages:
 
 It uses the TwiML\<Pay> to prompt the user to enter a credit card's information to pay a bill that can be configured on the UI, then it will process the payment through Stripe (which needs to be added as a connector on the Twilio console) and will let the user know if the payment was successful or not.
 
-![Pay Diagram](https://twilio-cms-prod.s3.amazonaws.com/images/pay-diagram-1-final.width-1600.png)
+![Pay Diagram](./pay-diagram-1-final.width-1600.png)
 
 ## Features
 
